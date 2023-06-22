@@ -4,7 +4,9 @@
 
 # Apache NuttX RTOS on 64-bit RISC-V
 
-TODO
+Read the article...
+
+-   ["64-bit RISC-V with Apache NuttX RTOS"](https://lupyuen.github.io/articles/riscv)
 
 1.  _So we're moving from Arm64 to RISC-V?_
 
