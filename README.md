@@ -6,7 +6,7 @@
 
 Read the article...
 
--   ["64-bit RISC-V with Apache NuttX RTOS"](https://lupyuen.github.io/articles/riscv)
+-   ["64-bit RISC-V with Apache NuttX Real-Time Operating System"](https://lupyuen.github.io/articles/riscv)
 
 TODO
 
