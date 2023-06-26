@@ -4,11 +4,13 @@
 
 # Apache NuttX RTOS on 64-bit RISC-V
 
-Read the article...
+Read the articles...
 
 -   ["64-bit RISC-V with Apache NuttX Real-Time Operating System"](https://lupyuen.github.io/articles/riscv)
 
-For NuttX on Star64 SBC...
+-   ["Rolling to RISC-V"](https://lupyuen.github.io/articles/pinephone2#rolling-to-risc-v)
+
+Porting NuttX to Star64 SBC...
 
 -   ["Apache NuttX RTOS for Pine64 Star64 64-bit RISC-V SBC (StarFive JH7110)"](https://github.com/lupyuen/nuttx-star64)
 
