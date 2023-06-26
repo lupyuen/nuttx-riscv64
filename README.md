@@ -8,6 +8,10 @@ Read the article...
 
 -   ["64-bit RISC-V with Apache NuttX Real-Time Operating System"](https://lupyuen.github.io/articles/riscv)
 
+For NuttX on Star64 SBC...
+
+-   ["Apache NuttX RTOS for Pine64 Star64 64-bit RISC-V SBC (StarFive JH7110)"](https://github.com/lupyuen/nuttx-star64)
+
 TODO
 
 1.  _So we're moving from Arm64 to RISC-V?_
