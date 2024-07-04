@@ -1,6 +1,6 @@
 ## Build and Test NuttX for QEMU RISC-V 64-bit
 
-name: qemu-riscv-nsh64
+name: qemu-riscv-nsh64 (Build and Test)
 
 permissions:
   ## Allow publishing of GitHub Release
