@@ -10,13 +10,17 @@ Read the articles...
 
 -   ["64-bit RISC-V with Apache NuttX Real-Time Operating System"](https://lupyuen.github.io/articles/riscv)
 
--   ["Rolling to RISC-V"](https://lupyuen.github.io/articles/pinephone2#rolling-to-risc-v)
-
-Porting NuttX to Star64 SBC...
-
 -   ["Apache NuttX RTOS for Pine64 Star64 64-bit RISC-V SBC (StarFive JH7110)"](https://github.com/lupyuen/nuttx-star64)
 
-TODO
+-   ["Rolling to RISC-V"](https://lupyuen.github.io/articles/pinephone2#rolling-to-risc-v)
+
+Apache NuttX RTOS is now built and tested daily on QEMU RISC-V...
+
+- GitHub Actions Workflow: [qemu-riscv-nsh64.yml](.github/workflows/qemu-riscv-nsh64.yml)
+
+- Expect Script: [qemu-riscv-nsh64.exp](qemu-riscv-nsh64.exp)
+
+<hr>
 
 1.  _So we're moving from Arm64 to RISC-V?_
 
