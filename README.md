@@ -4,6 +4,8 @@
 
 # Apache NuttX RTOS on 64-bit RISC-V
 
+[![Daily Build and Test: NuttX for QEMU RISC-V 64-bit](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-nsh64.yml/badge.svg)](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-nsh64.yml)
+
 Read the articles...
 
 -   ["64-bit RISC-V with Apache NuttX Real-Time Operating System"](https://lupyuen.github.io/articles/riscv)
