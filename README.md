@@ -8,17 +8,21 @@
 
 Read the articles...
 
--   ["64-bit RISC-V with Apache NuttX Real-Time Operating System"](https://lupyuen.github.io/articles/riscv)
+- ["64-bit RISC-V with Apache NuttX Real-Time Operating System"](https://lupyuen.github.io/articles/riscv)
 
--   ["Apache NuttX RTOS for Pine64 Star64 64-bit RISC-V SBC (StarFive JH7110)"](https://github.com/lupyuen/nuttx-star64)
+- ["NuttX for Star64 JH7110 SBC"](https://lupyuen.github.io/articles/release)
 
--   ["Rolling to RISC-V"](https://lupyuen.github.io/articles/pinephone2#rolling-to-risc-v)
+- ["NuttX for Ox64 BL808 SBC"](https://www.hackster.io/lupyuen/8-risc-v-sbc-on-a-real-time-operating-system-ox64-nuttx-474358)
+
+- ["NuttX for Oz64 SG2000 SBC"](https://lupyuen.github.io/articles/sg2000)
+
+- ["Rolling to RISC-V"](https://lupyuen.github.io/articles/pinephone2#rolling-to-risc-v)
 
 Apache NuttX RTOS is now built and tested daily on QEMU RISC-V...
 
-- GitHub Actions Workflow: [qemu-riscv-nsh64.yml](.github/workflows/qemu-riscv-nsh64.yml)
+- [qemu-riscv-nsh64.yml](.github/workflows/qemu-riscv-nsh64.yml): GitHub Actions Workflow
 
-- Expect Script: [qemu-riscv-nsh64.exp](qemu-riscv-nsh64.exp)
+- [qemu-riscv-nsh64.exp](qemu-riscv-nsh64.exp): Expect Script
 
 <hr>
 
