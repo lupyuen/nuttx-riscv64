@@ -1,6 +1,6 @@
-## Build and Test NuttX for QEMU RISC-V 32-bit (Kernel Build)
+## Daily Build and Test NuttX for QEMU RISC-V 32-bit (Kernel Build)
 
-name: qemu-riscv-knsh32 (Build and Test)
+name: qemu-riscv-knsh32 (RV32 Kernel Build, Daily Build and Test)
 
 permissions:
   ## Allow publishing of GitHub Release
@@ -160,7 +160,7 @@ jobs:
 
     - name: Get Current Date
       id: date
-      run: echo "::set-output name=date::$(date +'%Y-%m-%d-%H-%M-%S')"
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
 
     - name: Publish the GitHub Release
       uses: softprops/action-gh-release@v1

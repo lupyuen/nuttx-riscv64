@@ -1,6 +1,6 @@
 ## Special Build and Test NuttX for QEMU RISC-V 32-bit (Kernel Build)
 
-name: special-qemu-riscv-knsh32 (Special Build and Test)
+name: special-qemu-riscv-knsh32 (RV32 Kernel Build, Special Build and Test)
 
 permissions:
   ## Allow publishing of GitHub Release
