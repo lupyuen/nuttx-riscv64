@@ -13,8 +13,8 @@ on:
     - cron: '0 0 * * *'
 
   ## Run on every commit to this branch
-  # push:
-  #   branches: [ main ]
+  push:
+    branches: [ main ]
 
 jobs:
   build:
@@ -125,20 +125,20 @@ jobs:
           2>&1
 
         ## Dump the init disassembly to init.S
-        # riscv-none-elf-objdump \
-        #   --syms --source --reloc --demangle --line-numbers --wide \
-        #   --debugging \
-        #   ../apps/bin/init \
-        #   >init.S \
-        #   2>&1
+        riscv-none-elf-objdump \
+          --syms --source --reloc --demangle --line-numbers --wide \
+          --debugging \
+          ../apps/bin/init \
+          >init.S \
+          2>&1
 
         ## Dump the hello disassembly to hello.S
-        # riscv-none-elf-objdump \
-        #   --syms --source --reloc --demangle --line-numbers --wide \
-        #   --debugging \
-        #   ../apps/bin/hello \
-        #   >hello.S \
-        #   2>&1
+        riscv-none-elf-objdump \
+          --syms --source --reloc --demangle --line-numbers --wide \
+          --debugging \
+          ../apps/bin/hello \
+          >hello.S \
+          2>&1
 
     - name: Upload Build Outputs as Artifacts
       uses: actions/upload-artifact@v4
