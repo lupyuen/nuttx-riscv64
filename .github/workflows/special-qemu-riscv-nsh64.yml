@@ -1,6 +1,6 @@
-## Build and Test NuttX for QEMU RISC-V 64-bit
+## Special Build and Test NuttX for QEMU RISC-V 64-bit
 
-name: qemu-riscv-nsh64 (Build and Test)
+name: special-qemu-riscv-nsh64 (Special Build and Test)
 
 permissions:
   ## Allow publishing of GitHub Release
@@ -9,12 +9,12 @@ permissions:
 on:
 
   ## Run every day at 0:00 UTC
-  schedule:
-    - cron: '0 0 * * *'
+  ## schedule:
+  ##   - cron: '0 0 * * *'
 
   ## Run on every commit to this branch
-  ## push:
-  ##   branches: [ main ]
+  push:
+    branches: [ main ]
 
 jobs:
   build:
@@ -165,7 +165,7 @@ jobs:
     - name: Publish the GitHub Release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: qemu-riscv-nsh64-${{ steps.date.outputs.date }}
+        tag_name: special-qemu-riscv-nsh64-${{ steps.date.outputs.date }}
         draft: false
         prerelease: false
         generate_release_notes: false
