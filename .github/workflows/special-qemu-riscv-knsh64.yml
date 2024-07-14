@@ -197,7 +197,7 @@ jobs:
     - name: Run Test
       run: |
         set -x  #  Echo commands
-        script=qemu-riscv-nsh64
+        script=qemu-riscv-knsh64
         cd nuttx/nuttx
         wget https://raw.githubusercontent.com/lupyuen/nuttx-riscv64/main/$script.exp
         chmod +x $script.exp

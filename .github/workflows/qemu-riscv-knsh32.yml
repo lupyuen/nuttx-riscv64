@@ -1,6 +1,6 @@
-## Special Build and Test NuttX for QEMU RISC-V 32-bit (Kernel Build)
+## Build and Test NuttX for QEMU RISC-V 32-bit (Kernel Build)
 
-name: special-qemu-riscv-knsh32 (Special Build and Test)
+name: qemu-riscv-knsh32 (Build and Test)
 
 permissions:
   ## Allow publishing of GitHub Release
@@ -9,8 +9,8 @@ permissions:
 on:
 
   ## Run every day at 0:00 UTC
-  ## schedule:
-  ##   - cron: '0 0 * * *'
+  schedule:
+    - cron: '0 0 * * *'
 
   ## Run on every commit to this branch
   push:
@@ -28,7 +28,7 @@ jobs:
         set -x  #  Echo commands
 
         ## TODO: Paste the GitHub Repo and Branch
-        source=https://github.com/rushabhvg/nuttx/tree/qemu-drivers
+        source=https://github.com/apache/nuttx/tree/master
 
         ## Match `https://github.com/user/repo/tree/branch`
         pattern='\(.*\)\/tree\/\(.*\)'
@@ -165,7 +165,7 @@ jobs:
     - name: Publish the GitHub Release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: special-qemu-riscv-knsh32-${{ steps.date.outputs.date }}
+        tag_name: qemu-riscv-knsh32-${{ steps.date.outputs.date }}
         draft: false
         prerelease: false
         generate_release_notes: false
