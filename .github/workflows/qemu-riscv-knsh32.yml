@@ -194,6 +194,11 @@ jobs:
           expect qemu-system-riscv32
         qemu-system-riscv32 --version
 
+        ## Download OpenSBI for RISC-V 32-bit
+        wget https://github.com/riscv-software-src/opensbi/releases/download/v1.5/opensbi-1.5-rv-bin.tar.xz
+        tar xf opensbi-1.5-rv-bin.tar.xz
+        ls -l opensbi-1.5-rv-bin/share/opensbi/ilp32/generic/firmware/fw_dynamic.bin
+
     - name: Run Test
       run: |
         set -x  #  Echo commands

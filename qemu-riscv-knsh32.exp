@@ -13,6 +13,7 @@ spawn qemu-system-riscv32 \
   -M virt,aclint=on \
   -cpu rv32 \
   -kernel nuttx \
+  -bios opensbi-1.5-rv-bin/share/opensbi/ilp32/generic/firmware/fw_dynamic.bin \
   -nographic
 
 ## Wait for the prompt and enter `uname -a`
