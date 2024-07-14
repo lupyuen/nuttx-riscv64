@@ -1,6 +1,8 @@
-## Daily Build and Test NuttX for QEMU RISC-V 64-bit (Kernel Build)
+## Daily Build NuttX for QEMU RISC-V 64-bit (Kernel Build)
+## TODO: OSTest knsh64 hangs on GitHub Actions QEMU: "ostest_main: Started user_main at PID=10"
+## https://github.com/lupyuen/nuttx-riscv64/actions/runs/9926201550/job/27419504499
 
-name: qemu-riscv-knsh64 (RV64 Kernel Build, Daily Build and Test)
+name: qemu-riscv-knsh64 (RV64 Kernel Build, Daily Build)
 
 permissions:
   ## Allow publishing of GitHub Release
@@ -13,8 +15,8 @@ on:
     - cron: '0 0 * * *'
 
   ## Run on every commit to this branch
-  push:
-    branches: [ main ]
+  ## push:
+  ##   branches: [ main ]
 
 jobs:
   build:
@@ -186,7 +188,8 @@ jobs:
           nuttx/nuttx/Image
           nuttx/nuttx/System.map
 
-## TODO: OSTest knsh64 hangs on GitHub Actions: "ostest_main: Started user_main at PID=10"
+## TODO: OSTest knsh64 hangs on GitHub Actions QEMU: "ostest_main: Started user_main at PID=10"
+## https://github.com/lupyuen/nuttx-riscv64/actions/runs/9926201550/job/27419504499
 
     # - name: Install QEMU Emulator
     #   run:  |
