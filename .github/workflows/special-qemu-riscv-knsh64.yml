@@ -28,7 +28,7 @@ jobs:
         set -x  #  Echo commands
 
         ## TODO: Paste the GitHub Repo and Branch
-        source=https://github.com/rushabhvg/nuttx/tree/qemu-drivers
+        source=https://github.com/lupyuen2/wip-nuttx/tree/benchmark7
 
         ## Match `https://github.com/user/repo/tree/branch`
         pattern='\(.*\)\/tree\/\(.*\)'
