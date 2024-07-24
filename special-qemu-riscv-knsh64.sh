@@ -1,6 +1,23 @@
 #!/usr/bin/env bash
 ## Special Build and Test NuttX for QEMU RISC-V 64-bit (Kernel Build)
-## script /tmp/special-qemu-riscv-knsh64.log $HOME/riscv/nuttx-riscv64/special-qemu-riscv-knsh64.sh
+function runme() {
+  script /tmp/special-qemu-riscv-knsh64.log $HOME/riscv/nuttx-riscv64/special-qemu-riscv-knsh64.sh
+  cat /tmp/special-qemu-riscv-knsh64.log \
+    | tr -d '\r' \
+    | tr -d '\r' \
+    | sed 's/\x08/ /g' \
+    | sed 's/\x1B(B//g' \
+    | sed 's/\x1B\[K//g' \
+    | sed 's/\x1B[<=>]//g' \
+    | sed 's/\x1B\[[0-9:;<=>?]*[!]*[A-Za-z]//g' \
+    | sed 's/\x1B[@A-Z\\\]^_]\|\x1B\[[0-9:;<=>?]*[-!"#$%&'"'"'()*+,.\/]*[][\\@A-Z^_`a-z{|}~]//g' \
+    >>/tmp/special-qemu-riscv-knsh64-clean.log
+  cat /tmp/special-qemu-riscv-knsh64-clean.log | \
+    gh gist create \
+    --public \
+    --desc "Special Build and Test NuttX for QEMU RISC-V 64-bit (Kernel Build)" \
+    --filename "special-qemu-riscv-knsh64.log"
+}
 
 ## TODO: Set PATH
 export PATH="$HOME/xpack-riscv-none-elf-gcc-13.2.0-2/bin:$PATH"
@@ -41,7 +58,7 @@ cd $tmp_path
         set -x  #  Echo commands
 
         ## TODO: Paste the GitHub Repo and Branch
-        source=https://github.com/lupyuen2/wip-nuttx/tree/benchmark7
+        source=https://github.com/rushabhvg/nuttx/tree/qemu-riscv-driver
 
         ## Match `https://github.com/user/repo/tree/branch`
         pattern='\(.*\)\/tree\/\(.*\)'
