@@ -22,7 +22,12 @@ set +x  ##  Disable echo
 echo "----- Download the latest NuttX build for $BUILD_DATE"
 set -x  ##  Enable echo
 wget -q https://github.com/lupyuen/nuttx-riscv64/releases/download/$BUILD_PREFIX-$BUILD_DATE/nuttx.zip
-unzip -o nuttx.zip
+wget -q https://github.com/lupyuen/nuttx-riscv64/releases/download/$BUILD_PREFIX-$BUILD_DATE/apps.zip
+mkdir nuttx
+mkdir -p apps/bin
+unzip -o nuttx.zip -d nuttx
+unzip -o apps.zip -d apps/bin
+cd nuttx
 set +x  ##  Disable echo
 
 ## Print the Commit Hashes
@@ -37,6 +42,7 @@ script=qemu-riscv-knsh64
 wget https://raw.githubusercontent.com/lupyuen/nuttx-riscv64/main/$script.exp
 chmod +x $script.exp
 ls -l
+ls -l ../apps/bin
 cat nuttx.hash
 qemu-system-riscv64 --version
 ./$script.exp

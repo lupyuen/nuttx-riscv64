@@ -234,5 +234,6 @@ cd $tmp_path
         wget https://raw.githubusercontent.com/lupyuen/nuttx-riscv64/main/$script.exp
         chmod +x $script.exp
         ls -l
+        ls -l ../apps/bin
         cat nuttx.hash
         ./$script.exp

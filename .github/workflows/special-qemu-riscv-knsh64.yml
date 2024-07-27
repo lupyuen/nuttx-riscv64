@@ -164,7 +164,7 @@ jobs:
         set -x  #  Echo commands
         cd nuttx/nuttx
         zip nuttx.zip nuttx* initrd init.S hello.S Image System.map
-        zip apps.zip ../apps/bin/*
+        zip -j apps.zip ../apps/bin/*
 
     - name: Get Current Date
       id: date
