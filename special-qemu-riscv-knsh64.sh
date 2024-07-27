@@ -58,7 +58,7 @@ cd $tmp_path
         set -x  #  Echo commands
 
         ## TODO: Paste the GitHub Repo and Branch
-        source=https://github.com/rushabhvg/nuttx/tree/qemu-riscv-driver
+        source=https://github.com/apache/nuttx/tree/master
 
         ## Match `https://github.com/user/repo/tree/branch`
         pattern='\(.*\)\/tree\/\(.*\)'
