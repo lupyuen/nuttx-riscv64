@@ -15,8 +15,8 @@ on:
     - cron: '0 0 * * *'
 
   ## Run on every commit to this branch
-  ## push:
-  ##   branches: [ main ]
+  push:
+    branches: [ main ]
 
 jobs:
   build:
@@ -154,11 +154,19 @@ jobs:
           nuttx/nuttx/Image
           nuttx/nuttx/System.map
 
+    - name: Upload NuttX Apps as Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: apps.zip
+        path: |
+          nuttx/apps/bin/*
+
     - name: Zip Build Outputs for GitHub Release
       run: |
         set -x  #  Echo commands
         cd nuttx/nuttx
         zip nuttx.zip nuttx* initrd init.S hello.S Image System.map
+        zip apps.zip ../apps/bin/*
 
     - name: Get Current Date
       id: date
@@ -173,6 +181,7 @@ jobs:
         generate_release_notes: false
         files: |
           nuttx/nuttx/nuttx.zip
+          nuttx/nuttx/apps.zip
           nuttx/nuttx/nuttx
           nuttx/nuttx/nuttx.S
           nuttx/nuttx/nuttx.bin

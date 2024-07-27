@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-## Automated Testing of Automated Testing of Apache NuttX RTOS for QEMU RISC-V 64-bit Flat Build
+## Automated Testing of Automated Testing of Apache NuttX RTOS for QEMU RISC-V 64-bit Kernel Build
 
 set -e  ##  Exit when any command fails
 set -x  ##  Echo commands
 
 ##  Default Build Prefix
 if [ "$BUILD_PREFIX" == '' ]; then
-    export BUILD_PREFIX=qemu-riscv-nsh64
+    export BUILD_PREFIX=qemu-riscv-knsh64
 fi
 
 ##  Default Build Date is today (YYYY-MM-DD)
@@ -33,7 +33,7 @@ fi
 ##  Write the Release Tag for populating the Release Log later
 echo "$BUILD_PREFIX-$BUILD_DATE" >/tmp/release-$BUILD_PREFIX.tag
 
-script=qemu-riscv-nsh64
+script=qemu-riscv-knsh64
 wget https://raw.githubusercontent.com/lupyuen/nuttx-riscv64/main/$script.exp
 chmod +x $script.exp
 ls -l
