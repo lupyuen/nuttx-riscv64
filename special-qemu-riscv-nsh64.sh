@@ -29,6 +29,7 @@ tmp_path=/tmp/special-qemu-riscv-nsh64
 rm -rf $tmp_path
 mkdir $tmp_path
 cd $tmp_path
+neofetch
 
 # name: special-qemu-riscv-nsh64 (RV64 Flat Build, Special Build and Test)
 
@@ -76,6 +77,11 @@ cd $tmp_path
           --branch $branch \
           nuttx
         git clone https://github.com/apache/nuttx-apps apps
+
+        ## Switch to this NuttX Commit
+        # pushd nuttx
+        # git reset --hard 6047a9fe146ad4b4e8b2dc7bffe92d9075db429f
+        # popd
 
         cd .. #### Added this
 
