@@ -58,6 +58,9 @@ jobs:
           libexpat-dev gcc-multilib g++-multilib u-boot-tools util-linux \
           kconfig-frontends \
           wget u-boot-tools
+
+        rustup --version
+        rustc --version
         rustup target add riscv64gc-unknown-none-elf
 
     - name: Install Toolchain

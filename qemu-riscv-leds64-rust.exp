@@ -40,6 +40,14 @@ send -s "hello\r"
 expect "nsh> "
 send -s "getprime\r"
 
+## Wait for the prompt and enter `ls -l /dev`
+expect "nsh> "
+send -s "ls -l /dev\r"
+
+## Wait for the prompt and enter `ps`
+expect "nsh> "
+send -s "ps\r"
+
 ## Wait for the prompt and enter `leds_rust`
 expect "nsh> "
 send -s "leds_rust\r"
