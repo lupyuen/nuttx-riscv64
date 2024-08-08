@@ -59,10 +59,6 @@ jobs:
           kconfig-frontends \
           wget u-boot-tools
 
-        rustup --version
-        rustc --version
-        rustup target add riscv64gc-unknown-none-elf
-
     - name: Install Toolchain
       run:  |
         set -x  #  Echo commands
@@ -88,8 +84,11 @@ jobs:
 
         ## Show the GCC and Rust versions
         riscv-none-elf-gcc -v
-        rustup --version || true
-        rustc  --version || true
+        rustup --version
+        rustc  --version
+
+        ## Install the Rust Target
+        rustup target add riscv64gc-unknown-none-elf
 
         ## Configure the build
         tools/configure.sh rv-virt:leds64_rust
