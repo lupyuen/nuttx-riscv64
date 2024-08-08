@@ -1,0 +1,174 @@
+## Daily Build and Test NuttX for LEDs with Rust on QEMU RISC-V 64-bit (Flat Build)
+
+name: qemu-riscv-leds64-rust (LEDs with Rust, RV64 Flat Build, Daily Build and Test)
+
+permissions:
+  ## Allow publishing of GitHub Release
+  contents: write
+
+on:
+
+  ## Run every day at 0:00 UTC
+  schedule:
+    - cron: '0 0 * * *'
+
+  ## Run on every commit to this branch
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout Source Files
+      run:  |
+        set -x  #  Echo commands
+
+        ## TODO: Paste the GitHub Repo and Branch
+        source=https://github.com/apache/nuttx/tree/master
+
+        ## Match `https://github.com/user/repo/tree/branch`
+        pattern='\(.*\)\/tree\/\(.*\)'
+
+        ## `url` becomes `https://github.com/user/repo`
+        ## `branch` becomes `branch`
+        url=`echo $source | sed "s/$pattern/\1/"`
+        branch=`echo $source | sed "s/$pattern/\2/"`
+
+        ## Check out the `url` and `branch`
+        mkdir nuttx
+        cd nuttx
+        git clone \
+          $url \
+          --branch $branch \
+          nuttx
+        git clone https://github.com/apache/nuttx-apps apps
+
+    - name: Install Build Tools
+      run:  |
+        set -x  #  Echo commands
+        sudo apt -y update
+        sudo apt -y install \
+          bison flex gettext texinfo libncurses5-dev libncursesw5-dev \
+          gperf automake libtool pkg-config build-essential gperf genromfs \
+          libgmp-dev libmpc-dev libmpfr-dev libisl-dev binutils-dev libelf-dev \
+          libexpat-dev gcc-multilib g++-multilib u-boot-tools util-linux \
+          kconfig-frontends \
+          wget u-boot-tools
+        rustup target add riscv64gc-unknown-none-elf
+
+    - name: Install Toolchain
+      run:  |
+        set -x  #  Echo commands
+        wget --no-check-certificate https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v13.2.0-2/xpack-riscv-none-elf-gcc-13.2.0-2-linux-x64.tar.gz
+        tar -xf xpack-riscv-none-elf-gcc-*.tar.gz
+
+    - name: Build
+      run: |
+        set -x  #  Echo commands
+
+        ## Add toolchain to PATH
+        export PATH=$PATH:$PWD/xpack-riscv-none-elf-gcc-13.2.0-2/bin
+        cd nuttx/nuttx
+
+        ## Dump the git hash
+        hash1=`git rev-parse HEAD`
+        pushd ../apps
+        hash2=`git rev-parse HEAD`
+        popd
+        echo NuttX Source: https://github.com/apache/nuttx/tree/$hash1 >nuttx.hash
+        echo NuttX Apps: https://github.com/apache/nuttx-apps/tree/$hash2 >>nuttx.hash
+        cat nuttx.hash
+
+        ## Show the GCC and Rust versions
+        riscv-none-elf-gcc -v
+        rustup --version || true
+        rustc  --version || true
+
+        ## Configure the build
+        tools/configure.sh rv-virt:leds64_rust
+
+        ## Preserve the build config
+        cp .config nuttx.config
+
+        ## Run the build
+        make
+
+        ## Show the size
+        riscv-none-elf-size nuttx
+
+        ## Dump the disassembly to nuttx.S
+        riscv-none-elf-objdump \
+          --syms --source --reloc --demangle --line-numbers --wide \
+          --debugging \
+          nuttx \
+          >nuttx.S \
+          2>&1
+
+    - name: Upload Build Outputs as Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: nuttx.zip
+        path: |
+          nuttx/nuttx/nuttx*
+          nuttx/nuttx/initrd
+          nuttx/nuttx/init.S
+          nuttx/nuttx/hello.S
+          nuttx/nuttx/Image
+          nuttx/nuttx/System.map
+
+    - name: Zip Build Outputs for GitHub Release
+      run: |
+        set -x  #  Echo commands
+        cd nuttx/nuttx
+        zip nuttx.zip nuttx* initrd init.S hello.S Image System.map
+
+    - name: Get Current Date
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+
+    - name: Publish the GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: qemu-riscv-leds64-rust-${{ steps.date.outputs.date }}
+        draft: false
+        prerelease: false
+        generate_release_notes: false
+        files: |
+          nuttx/nuttx/nuttx.zip
+          nuttx/nuttx/nuttx
+          nuttx/nuttx/nuttx.S
+          nuttx/nuttx/nuttx.bin
+          nuttx/nuttx/nuttx.map
+          nuttx/nuttx/nuttx.hex
+          nuttx/nuttx/nuttx.config
+          nuttx/nuttx/nuttx.manifest
+          nuttx/nuttx/nuttx.hash
+          nuttx/nuttx/nuttx-export*
+          nuttx/nuttx/initrd
+          nuttx/nuttx/init.S
+          nuttx/nuttx/hello.S
+          nuttx/nuttx/Image
+          nuttx/nuttx/System.map
+
+    - name: Install QEMU Emulator
+      run:  |
+        set -x  #  Echo commands
+        sudo apt -y update
+        sudo apt -y install \
+          expect qemu-system-riscv64
+        qemu-system-riscv64 --version
+
+    - name: Run Test
+      run: |
+        set -x  #  Echo commands
+        script=qemu-riscv-leds64-rust
+        cd nuttx/nuttx
+        wget https://raw.githubusercontent.com/lupyuen/nuttx-riscv64/main/$script.exp
+        chmod +x $script.exp
+        ls -l
+        cat nuttx.hash
+        ./$script.exp

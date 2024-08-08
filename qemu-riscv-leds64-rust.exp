@@ -1,0 +1,92 @@
+#!/usr/bin/expect
+## Expect Script for Testing NuttX with QEMU Emulator
+
+## Wait at most 10 seconds
+set timeout 10
+
+## For every 1 character sent, wait 0.01 milliseconds
+set send_slow {1 0.01}
+
+## Start the QEMU Emulator for 64-bit RISC-V
+spawn qemu-system-riscv64 \
+  -semihosting \
+  -M virt,aclint=on \
+  -cpu rv64 \
+  -bios none \
+  -kernel nuttx \
+  -nographic
+
+## Wait for the prompt and enter `uname -a`
+expect "nsh> "
+send -s "uname -a\r"
+
+## Wait for the prompt and enter `free`
+expect "nsh> "
+send -s "free\r"
+
+## Wait for the prompt and enter `hello`
+expect "nsh> "
+send -s "hello\r"
+
+## Wait for the prompt and enter `getprime`
+expect "nsh> "
+send -s "getprime\r"
+
+## Wait for the prompt and enter `hello`
+expect "nsh> "
+send -s "hello\r"
+
+## Wait for the prompt and enter `getprime`
+expect "nsh> "
+send -s "getprime\r"
+
+## Wait for the prompt and enter `leds_rust`
+expect "nsh> "
+send -s "leds_rust\r"
+
+## Check the response...
+expect {
+  ## If we see this message, continue normally
+  "board_userled: LED 1 set to 0" {}
+
+  ## If timeout, exit with an error
+  timeout { 
+    ## Terminate the session: Ctrl-A x
+    send "\x01x"
+    puts "\n===== Error: Test Failed\n"
+    exit 1 
+  }
+}
+
+## Check the response...
+expect {
+  ## If we see this message, continue normally
+  "board_userled: LED 2 set to 0" {}
+
+  ## If timeout, exit with an error
+  timeout { 
+    ## Terminate the session: Ctrl-A x
+    send "\x01x"
+    puts "\n===== Error: Test Failed\n"
+    exit 1 
+  }
+}
+
+## Check the response...
+expect {
+  ## If we see this message, continue normally
+  "board_userled: LED 3 set to 0" {}
+
+  ## If timeout, exit with an error
+  timeout { 
+    ## Terminate the session: Ctrl-A x
+    send "\x01x"
+    puts "\n===== Error: Test Failed\n"
+    exit 1 
+  }
+}
+
+## Terminate the session: Ctrl-A x
+send "\x01x"
+puts "\n===== Test OK\n"
+exit 0 
