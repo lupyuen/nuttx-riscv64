@@ -1,6 +1,6 @@
-## Special Build and Test NuttX for QEMU RISC-V 32-bit (Kernel Build)
+## Daily Build and Test NuttX for QEMU RISC-V 32-bit (Kernel Build)
 
-name: special-qemu-riscv-knsh32 (RV32 Kernel Build, Special Build and Test)
+name: qemu-riscv-knsh (RV32 Kernel Build, Daily Build and Test)
 
 permissions:
   ## Allow publishing of GitHub Release
@@ -9,8 +9,8 @@ permissions:
 on:
 
   ## Run every day at 0:00 UTC
-  ## schedule:
-  ##   - cron: '0 0 * * *'
+  schedule:
+    - cron: '0 0 * * *'
 
   ## Run on every commit to this branch
   push:
@@ -88,7 +88,7 @@ jobs:
         rustc  --version || true
 
         ## Configure the build
-        tools/configure.sh rv-virt:knsh32
+        tools/configure.sh rv-virt:knsh
 
         ## Preserve the build config
         cp .config nuttx.config
@@ -160,12 +160,12 @@ jobs:
 
     - name: Get Current Date
       id: date
-      run: echo "::set-output name=date::$(date +'%Y-%m-%d-%H-%M-%S')"
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
 
     - name: Publish the GitHub Release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: special-qemu-riscv-knsh32-${{ steps.date.outputs.date }}
+        tag_name: qemu-riscv-knsh-${{ steps.date.outputs.date }}
         draft: false
         prerelease: false
         generate_release_notes: false
@@ -203,7 +203,7 @@ jobs:
     - name: Run Test
       run: |
         set -x  #  Echo commands
-        script=qemu-riscv-knsh32
+        script=qemu-riscv-knsh
         cd nuttx/nuttx
         wget https://raw.githubusercontent.com/lupyuen/nuttx-riscv64/main/$script.exp
         chmod +x $script.exp

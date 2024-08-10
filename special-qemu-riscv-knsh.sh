@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 ## Special Build and Test NuttX for QEMU RISC-V 32-bit (Kernel Build)
 function runme() {
-  script /tmp/special-qemu-riscv-knsh32.log $HOME/riscv/nuttx-riscv64/special-qemu-riscv-knsh32.sh
-  cat /tmp/special-qemu-riscv-knsh32.log \
+  script /tmp/special-qemu-riscv-knsh.log $HOME/riscv/nuttx-riscv64/special-qemu-riscv-knsh.sh
+  cat /tmp/special-qemu-riscv-knsh.log \
     | tr -d '\r' \
     | tr -d '\r' \
     | sed 's/\x08/ /g' \
@@ -11,12 +11,12 @@ function runme() {
     | sed 's/\x1B[<=>]//g' \
     | sed 's/\x1B\[[0-9:;<=>?]*[!]*[A-Za-z]//g' \
     | sed 's/\x1B[@A-Z\\\]^_]\|\x1B\[[0-9:;<=>?]*[-!"#$%&'"'"'()*+,.\/]*[][\\@A-Z^_`a-z{|}~]//g' \
-    >>/tmp/special-qemu-riscv-knsh32-clean.log
-  cat /tmp/special-qemu-riscv-knsh32-clean.log | \
+    >>/tmp/special-qemu-riscv-knsh-clean.log
+  cat /tmp/special-qemu-riscv-knsh-clean.log | \
     gh gist create \
     --public \
     --desc "Special Build and Test NuttX for QEMU RISC-V 32-bit (Kernel Build)" \
-    --filename "special-qemu-riscv-knsh32.log"
+    --filename "special-qemu-riscv-knsh.log"
 }
 
 ## TODO: Set PATH
@@ -25,13 +25,13 @@ export PATH="$HOME/xpack-riscv-none-elf-gcc-13.2.0-2/bin:$PATH"
 set -e  #  Exit when any command fails
 set -x  #  Echo commands
 
-tmp_path=/tmp/special-qemu-riscv-knsh32
+tmp_path=/tmp/special-qemu-riscv-knsh
 rm -rf $tmp_path
 mkdir $tmp_path
 cd $tmp_path
 neofetch
 
-# name: special-qemu-riscv-knsh32 (RV32 Kernel Build, Special Build and Test)
+# name: special-qemu-riscv-knsh (RV32 Kernel Build, Special Build and Test)
 
 # permissions:
 #   ## Allow publishing of GitHub Release
@@ -126,7 +126,7 @@ neofetch
         rustc  --version || true
 
         ## Configure the build
-        tools/configure.sh rv-virt:knsh32
+        tools/configure.sh rv-virt:knsh
 
         ## Preserve the build config
         cp .config nuttx.config
@@ -203,7 +203,7 @@ neofetch
     # - name: Publish the GitHub Release
     #   uses: softprops/action-gh-release@v1
     #   with:
-    #     tag_name: special-qemu-riscv-knsh32-${{ steps.date.outputs.date }}
+    #     tag_name: special-qemu-riscv-knsh-${{ steps.date.outputs.date }}
     #     draft: false
     #     prerelease: false
     #     generate_release_notes: false
@@ -241,7 +241,7 @@ neofetch
     # - name: Run Test
     #   run: |
         set -x  #  Echo commands
-        script=qemu-riscv-knsh32
+        script=qemu-riscv-knsh
         # cd nuttx/nuttx
         wget https://raw.githubusercontent.com/lupyuen/nuttx-riscv64/main/$script.exp
         chmod +x $script.exp
