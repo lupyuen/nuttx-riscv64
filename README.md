@@ -4,13 +4,11 @@
 
 # Apache NuttX RTOS on 64-bit RISC-V
 
-[![Daily Build and Test: qemu-riscv-nsh](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-nsh.yml/badge.svg)](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-nsh.yml)
-
-[![Daily Build and Test: qemu-riscv-nsh64](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-nsh64.yml/badge.svg)](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-nsh64.yml)
-
-[![Daily Build and Test: qemu-riscv-knsh](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-knsh.yml/badge.svg)](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-knsh.yml)
-
-[![Daily Build and Test: qemu-riscv-knsh64](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-knsh64.yml/badge.svg)](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-knsh64.yml)
+[![Daily Build and Test: qemu-riscv-nsh](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-nsh.yml/badge.svg)](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-nsh.yml) <br>
+[![Daily Build and Test: qemu-riscv-knsh](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-knsh.yml/badge.svg)](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-knsh.yml) <br>
+[![Daily Build: qemu-riscv-nsh64](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-nsh64.yml/badge.svg)](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-nsh64.yml) <br>
+[![Daily Build: qemu-riscv-knsh64](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-knsh64.yml/badge.svg)](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-knsh64.yml) <br>
+[![Daily Build and Test: qemu-riscv-leds64-rust](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-leds64-rust.yml/badge.svg)](https://github.com/lupyuen/nuttx-riscv64/actions/workflows/qemu-riscv-leds64-rust.yml) <br>
 
 Read the articles...
 
