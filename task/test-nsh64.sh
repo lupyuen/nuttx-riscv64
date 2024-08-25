@@ -19,11 +19,13 @@ mkdir /tmp/$BUILD_PREFIX
 cd /tmp/$BUILD_PREFIX
 
 set +x  ##  Disable echo
+date
 echo "----- Download the latest NuttX build for $BUILD_DATE"
 set -x  ##  Enable echo
 wget -q https://github.com/lupyuen/nuttx-riscv64/releases/download/$BUILD_PREFIX-$BUILD_DATE/nuttx.zip
 unzip -o nuttx.zip
 set +x  ##  Disable echo
+date
 
 ## Print the Commit Hashes
 if [ -f nuttx.hash ]; then
@@ -39,4 +41,6 @@ chmod +x $script.exp
 ls -l
 cat nuttx.hash
 qemu-system-riscv64 --version
+date
 ./$script.exp
+date
