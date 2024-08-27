@@ -11,7 +11,7 @@ function runme() {
     | sed 's/\x1B[<=>]//g' \
     | sed 's/\x1B\[[0-9:;<=>?]*[!]*[A-Za-z]//g' \
     | sed 's/\x1B[@A-Z\\\]^_]\|\x1B\[[0-9:;<=>?]*[-!"#$%&'"'"'()*+,.\/]*[][\\@A-Z^_`a-z{|}~]//g' \
-    >>/tmp/special-qemu-riscv-knsh64-clean.log
+    >/tmp/special-qemu-riscv-knsh64-clean.log
   cat /tmp/special-qemu-riscv-knsh64-clean.log | \
     gh gist create \
     --public \

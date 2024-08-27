@@ -11,11 +11,11 @@ function runme() {
     | sed 's/\x1B[<=>]//g' \
     | sed 's/\x1B\[[0-9:;<=>?]*[!]*[A-Za-z]//g' \
     | sed 's/\x1B[@A-Z\\\]^_]\|\x1B\[[0-9:;<=>?]*[-!"#$%&'"'"'()*+,.\/]*[][\\@A-Z^_`a-z{|}~]//g' \
-    >>/tmp/special-qemu-riscv-knsh-paging-clean.log
+    >/tmp/special-qemu-riscv-knsh-paging-clean.log
   cat /tmp/special-qemu-riscv-knsh-paging-clean.log | \
     gh gist create \
     --public \
-    --desc "Special Build and Test NuttX for QEMU RISC-V 32-bit (Kernel Build)" \
+    --desc "Special Build and Test NuttX for QEMU RISC-V 32-bit (Kernel Build with Paging)" \
     --filename "special-qemu-riscv-knsh-paging.log"
 }
 
