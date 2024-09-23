@@ -132,7 +132,7 @@ neofetch
         cp .config nuttx.config
 
         ## Run the build
-        make
+        make -j
 
         ## Build Apps Filesystem
         make export
