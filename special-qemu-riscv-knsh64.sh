@@ -17,6 +17,15 @@ function runme() {
     --public \
     --desc "Special Build and Test NuttX for QEMU RISC-V 64-bit (Kernel Build)" \
     --filename "special-qemu-riscv-knsh64.log"
+
+  ## Test 20 times
+  cd /tmp/special-qemu-riscv-knsh64/nuttx/nuttx
+  for i in {1..20}
+  do
+    echo Attempt $i
+    ./qemu-riscv-knsh64.exp 
+    sleep 10
+  done
 }
 
 ## TODO: Set PATH
