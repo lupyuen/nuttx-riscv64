@@ -22,8 +22,14 @@ function runme() {
   cd /tmp/special-qemu-riscv-knsh64/nuttx/nuttx
   for i in {1..20}
   do
-    echo Attempt $i
+    echo "===== Attempt $i"
     ./qemu-riscv-knsh64.exp 
+    if [ $? -ne 0 ] 
+    then
+      echo "===== ERROR AT ATTEMPT $i"
+      break
+    fi
+    echo "===== $i Attempts Successful"
     sleep 10
   done
 }
