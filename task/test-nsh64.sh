@@ -41,6 +41,21 @@ chmod +x $script.exp
 ls -l
 cat nuttx.hash
 qemu-system-riscv64 --version
-date
-./$script.exp
-date
+
+##  Test 20 times
+for i in {1..20}
+do
+    echo "===== Attempt $i"
+    date
+    set +e  ##  Ignore error when any command fails
+    ./$script.exp
+    if [ $? -ne 0 ] 
+    then
+        echo "===== ERROR AT ATTEMPT $i"
+        break
+    fi
+    set -e  ##  Exit when any command fails
+    echo "===== $i Attempts Successful"
+    date
+    sleep 10
+done

@@ -43,12 +43,6 @@ function test_nuttx {
     | tee /tmp/release-$BUILD_PREFIX.log \
     2>&1
 
-  ## Trim to first 100000 bytes
-  head -c 100000 /tmp/release-$BUILD_PREFIX.log \
-    >/tmp/release2-$BUILD_PREFIX.log
-  mv /tmp/release2-$BUILD_PREFIX.log \
-    /tmp/release-$BUILD_PREFIX.log
-
   echo "----- Upload the Test Log"
   $SCRIPT_DIR/upload-nsh64.sh \
     /tmp/release-$BUILD_PREFIX.tag \

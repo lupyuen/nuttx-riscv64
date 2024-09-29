@@ -65,11 +65,15 @@ cat $log \
     >>/tmp/upload-knsh64.log
 echo '```' >>/tmp/upload-knsh64.log
 
+## Trim to first 100000 bytes
+head -c 100000 /tmp/upload-knsh64.log \
+    >/tmp/upload-knsh64-trim.log
+
 ##  Upload the Test Log to the GitHub Release Notes
 set -x  ##  Echo commands
 gh release edit \
     `cat $tag` \
-    --notes-file /tmp/upload-knsh64.log \
+    --notes-file /tmp/upload-knsh64-trim.log \
     --repo $repo
 set +x  ##  Don't echo commands
 
