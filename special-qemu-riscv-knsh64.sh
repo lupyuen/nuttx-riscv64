@@ -50,6 +50,19 @@ function commit_test() {
   for commit in $(git log -50 --pretty=format:"%H")
   do
     echo Testing Commit $commit
+    git reset --hard $commit
+    sleep 5
+    test_once $commit
+  done
+}
+
+## Test by Another Past 50 Commits
+function commit_test_again() {
+  for commit in $(git log -50 --pretty=format:"%H")
+  do
+    echo Testing Commit $commit
+    git reset --hard $commit
+    sleep 5
     test_once $commit
   done
 }
