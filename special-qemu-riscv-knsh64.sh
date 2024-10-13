@@ -40,14 +40,14 @@ function stress_test() {
   done
 }
 
-## Test by Past 20 Commits
+## Test by Past 50 Commits
 function commit_test() {
   date=$(date +'%Y-%m-%d-%H-%M-%S')
   mkdir -p /tmp/$date
   cd /tmp/$date
   git clone https://github.com/apache/nuttx
   cd nuttx
-  for commit in $(git log -20 --pretty=format:"%H")
+  for commit in $(git log -50 --pretty=format:"%H")
   do
     echo Testing Commit $commit
     test_once $commit
