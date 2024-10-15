@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # Validate all defconfig files:
 # git clone https://github.com/apache/nuttx
+# git clone https://github.com/apache/nuttx-apps apps
 # cd nuttx
+# distclean
 # check_config.sh
 
 # Derived from https://github.com/apache/nuttx/blob/master/tools/testbuild.sh
