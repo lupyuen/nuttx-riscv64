@@ -156,7 +156,7 @@ neofetch
 
     # - name: Build
     #   run: |
-        # set -x  #  Echo commands
+    #     set -x  #  Echo commands
 
         ## Add toolchain to PATH
         # export PATH=$PATH:$PWD/xpack-riscv-none-elf-gcc-13.2.0-2/bin
