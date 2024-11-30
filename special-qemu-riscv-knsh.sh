@@ -14,6 +14,7 @@ function test_once() {
     | sed 's/\x1B[<=>]//g' \
     | sed 's/\x1B\[[0-9:;<=>?]*[!]*[A-Za-z]//g' \
     | sed 's/\x1B[@A-Z\\\]^_]\|\x1B\[[0-9:;<=>?]*[-!"#$%&'"'"'()*+,.\/]*[][\\@A-Z^_`a-z{|}~]//g' \
+    | cat -v \
     >/tmp/special-qemu-riscv-knsh-clean.log
   cat /tmp/special-qemu-riscv-knsh-clean.log | \
     gh gist create \
