@@ -24,6 +24,14 @@ send -s "uname -a\r"
 expect "nsh> "
 send -s "free\r"
 
+## Wait for the prompt and enter `ps`
+expect "nsh> "
+send -s "ps\r"
+
+## Wait for the prompt and enter `ls -l /dev`
+expect "nsh> "
+send -s "ls -l /dev\r"
+
 ## Wait for the prompt and enter `hello`
 expect "nsh> "
 send -s "hello\r"
