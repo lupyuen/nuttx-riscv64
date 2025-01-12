@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-## Special Build and Test NuttX for QEMU RISC-V 64-bit (Flat Build)
-function runme() {
-  script /tmp/special-qemu-riscv-nsh64.log $HOME/riscv/nuttx-riscv64/special-qemu-riscv-nsh64.sh
+## Special Build and Test NuttX for QEMU RISC-V 32-bit (Flat Build)
+function test_once() {
+  commit=$1 ## Optional Commit ID
+  script /tmp/special-qemu-riscv-nsh64.log \
+    $HOME/riscv/nuttx-riscv64/special-qemu-riscv-nsh64.sh \
+    $commit
   cat /tmp/special-qemu-riscv-nsh64.log \
     | tr -d '\r' \
     | tr -d '\r' \
@@ -16,8 +19,53 @@ function runme() {
   cat /tmp/special-qemu-riscv-nsh64-clean.log | \
     gh gist create \
     --public \
-    --desc "Special Build and Test NuttX for QEMU RISC-V 64-bit (Flat Build)" \
+    --desc "$commit Special Build and Test NuttX for QEMU RISC-V 64-bit (Flat Build)" \
     --filename "special-qemu-riscv-nsh64.log"
+}
+
+## Test 20 times
+function stress_test() {
+  test_once
+  cd /tmp/special-qemu-riscv-knsh64/nuttx/nuttx
+  for i in {1..20}
+  do
+    echo "===== Attempt $i"
+    ./qemu-riscv-knsh64.exp 
+    if [ $? -ne 0 ] 
+    then
+      echo "===== ERROR AT ATTEMPT $i"
+      break
+    fi
+    echo "===== $i Attempts Successful"
+    sleep 10
+  done
+}
+
+## Test by Past 50 Commits
+function commit_test() {
+  date=$(date +'%Y-%m-%d-%H-%M-%S')
+  mkdir -p /tmp/$date
+  cd /tmp/$date
+  git clone https://github.com/apache/nuttx
+  cd nuttx
+  for commit in $(git log -50 --pretty=format:"%H")
+  do
+    echo Testing Commit $commit
+    git reset --hard $commit
+    sleep 5
+    test_once $commit
+  done
+}
+
+## Test by Another Past 50 Commits
+function commit_test_again() {
+  for commit in $(git log -50 --pretty=format:"%H")
+  do
+    echo Testing Commit $commit
+    git reset --hard $commit
+    sleep 5
+    test_once $commit
+  done
 }
 
 ## TODO: Set PATH
@@ -26,6 +74,7 @@ export PATH="$HOME/xpack-riscv-none-elf-gcc-13.2.0-2/bin:$PATH"
 set -e  #  Exit when any command fails
 set -x  #  Echo commands
 
+commit=$1 ## Optional Commit ID
 tmp_path=/tmp/special-qemu-riscv-nsh64
 rm -rf $tmp_path
 mkdir $tmp_path
@@ -80,9 +129,11 @@ neofetch
         git clone https://github.com/apache/nuttx-apps apps
 
         ## Switch to this NuttX Commit
-        # pushd nuttx
-        # git reset --hard 6047a9fe146ad4b4e8b2dc7bffe92d9075db429f
-        # popd
+        if [[ "$commit" != "" ]]; then
+          pushd nuttx
+          git reset --hard $commit
+          popd
+        fi
 
         cd .. #### Added this
 
@@ -133,7 +184,7 @@ neofetch
         cp .config nuttx.config
 
         ## Run the build
-        make
+        make -j
 
         ## Build Apps Filesystem
         # make export
