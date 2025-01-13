@@ -19,7 +19,7 @@ function test_once() {
   cat /tmp/special-qemu-riscv-knsh-clean.log | \
     gh gist create \
     --public \
-    --desc "Special Build and Test NuttX for QEMU RISC-V 32-bit (Kernel Build)" \
+    --desc "$commit Special Build and Test NuttX for QEMU RISC-V 32-bit (Kernel Build)" \
     --filename "special-qemu-riscv-knsh.log"
 }
 
