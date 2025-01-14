@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 ## Special Build and Test NuttX for QEMU RISC-V 64-bit (Kernel Build)
+echo "***** Now running test_once in https://github.com/lupyuen/nuttx-riscv64/blob/main/special-qemu-riscv-knsh64.sh"
+
 function test_once() {
   commit=$1 ## Optional Commit ID
   script /tmp/special-qemu-riscv-knsh64.log \
