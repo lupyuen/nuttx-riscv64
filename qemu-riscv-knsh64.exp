@@ -1,9 +1,6 @@
 #!/usr/bin/expect
 ## Expect Script for Testing NuttX with QEMU Emulator
 
-## Wait at most 120 seconds
-set timeout 120
-
 ## For every 1 character sent, wait 0.01 milliseconds
 set send_slow {1 0.01}
 
@@ -14,6 +11,9 @@ spawn qemu-system-riscv64 \
   -cpu rv64 \
   -kernel nuttx \
   -nographic
+
+## Wait at most 10 seconds to boot
+set timeout 10
 
 ## Wait for the prompt and enter `uname -a`
 expect {
@@ -28,6 +28,9 @@ expect {
   }
 }
 send -s "uname -a\r"
+
+## Wait at most 120 seconds for other commands
+set timeout 120
 
 ## Wait for the prompt and enter `free`
 expect "nsh> "
