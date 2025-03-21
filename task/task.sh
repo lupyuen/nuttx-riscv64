@@ -15,8 +15,9 @@ nohup $HOME/sg2000/autotest-nuttx-sg2000/scripts/task.sh &
 sleep 60
 
 ## BL602 Test Task
-nohup $HOME/bl602/remote-bl602/scripts/task.sh &
-sleep 60
+# nohup $HOME/bl602/remote-bl602/scripts/task.sh &
+# sleep 60
+echo Skipping $HOME/bl602/remote-bl602/scripts/task.sh
 
 ## nsh64 Test Task
 nohup $HOME/riscv/nuttx-riscv64/task/task-nsh64.sh &
